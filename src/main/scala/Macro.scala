@@ -12,7 +12,7 @@ def mkClearFnImpl[S: Type, A](
   def extractFocus(tree: Tree): String = tree match
     case Inlined(_, _, p) =>
       extractFocus(p)
-    case Block(List(DefDef(_, _, _, Some(Select(Ident(_), fieldName)))), _) =>
+    case Lambda(_, Select(Ident(_), fieldName)) =>
       fieldName
     case _ =>
       report.errorAndAbort("Unsupported shape, should be a path, like _.id")
